@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DannyDent – Digital Dental Lab</title>
+  <link rel="icon" href="logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --navy: #09132b;
+      --navy-deep: #0b1b37;
+      --navy-light: #142845;
+      --accent: #2e7ce1;
+      --accent-dark: #0f4fa5;
+      --accent-soft: #dce8fb;
+      --white: #ffffff;
+      --off-white: #f8fbff;
+      --gray: #d9e4f1;
+      --text: #111f36;
+      --muted: #6b7d9e;
+      --border: rgba(46, 124, 225, 0.18);
+      --shadow: rgba(17, 34, 73, 0.16);
+      --footer-logo-size: 170px;
+      --footer-logo-preserve: 70px;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Poppins', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--gray); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 86px; padding: 0 4rem;
+      background: transparent; border-bottom: 1px solid transparent;
+      transition: background .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+    nav.scrolled, nav:hover {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom-color: var(--border);
+      box-shadow: 0 2px 18px var(--shadow);
+    }
+    .nav-logo img { 
+      height: 88px; 
+      width: auto; 
+      display: block; 
+      /* AQUÍ ESTÁ LA MAGIA */
+      transform: scale(1.3); /* Cámbialo a 1.2, 1.4 o 1.5 según qué tan grande lo quieras */
+      transform-origin: left center; /* Mantiene el logo alineado a la izquierda al crecer */
+    }
+
+    .nav-links { 
+      display: flex; 
+      gap: 1.8rem; 
+      list-style: none; 
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.94);
+      font-size: .8rem; 
+      font-weight: 600; 
+      letter-spacing: .08em; 
+      text-transform: uppercase;
+      text-decoration: none; 
+      text-shadow: 0 1px 8px rgba(0,0,0,.3);
+      transition: color .2s ease;
+    }
+
+    nav.scrolled .nav-links a, nav:hover .nav-links a { color: var(--muted); text-shadow: none; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: .6rem 1.3rem; border-radius: 999px; font-size: .78rem; font-weight: 600;
+      letter-spacing: .05em; text-transform: uppercase; text-decoration: none; color: var(--white) !important;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      box-shadow: 0 8px 20px rgba(26,82,168,.28); text-shadow: none !important;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { transform: translateY(-2px); background: linear-gradient(135deg, var(--accent-dark), var(--accent)); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: white; border-radius: 999px; }
+    nav.scrolled .hamburger span, nav:hover .hamburger span { background: var(--navy); }
+
+    #hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: flex-start;
+      padding: 8rem 4rem 5rem; overflow: hidden;
+    }
+    .hero-bg, .hero-overlay {
+      position: absolute; inset: 0;
+    }
+    .hero-bg {
+      background: #000;
+    }
+    .hero-bg video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(0.65);
+    }
+    .hero-overlay {
+      background: linear-gradient(90deg, rgba(9,19,43,0.94) 0%, rgba(46,124,225,0.72) 45%, rgba(9,19,43,0.24) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2; max-width: 620px;
+    }
+    .hero-badge {
+      display: inline-block; margin-bottom: 1.5rem;
+      background: rgba(255,255,255,0.18); border: 1px solid rgba(46,124,225,0.28);
+      color: var(--white); padding: .45rem 1rem; border-radius: 999px;
+      font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;
+      backdrop-filter: blur(8px);
+    }
+    .hero-title {
+      font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; line-height: 1.05;
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .hero-title .accent { color: var(--accent-soft); }
+    .hero-title .accent-blue { color: var(--accent); }
+    .hero-slogan {
+      font-size: 1.05rem; color: rgba(255,255,255,0.86); font-weight: 500; margin-bottom: 1.2rem;
+    }
+    .hero-desc {
+      max-width: 540px; color: rgba(255,255,255,0.75); margin-bottom: 2.2rem; font-size: .95rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary, .btn-outline {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      padding: .85rem 1.4rem; border-radius: 999px; text-decoration: none; font-weight: 600; letter-spacing: .04em;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: var(--white); box-shadow: 0 10px 28px rgba(26,82,168,.22);
+    }
+    .btn-primary:hover { transform: translateY(-2px); background: linear-gradient(135deg, var(--accent-dark), var(--accent)); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.55); color: var(--white); background: rgba(255,255,255,0.08);
+    }
+    .btn-outline:hover { transform: translateY(-2px); background: rgba(255,255,255,0.18); }
+    .hero-scroll {
+      position: absolute; left: 50%; bottom: 2rem; transform: translateX(-50%); z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: .7rem;
+    }
+    .scroll-line {
+      width: 1px; height: 42px; background: linear-gradient(to bottom, var(--accent-soft), transparent);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+
+    section { padding: 6rem 4rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      color: var(--accent); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+      margin-bottom: .8rem;
+    }
+    .section-title {
+      font-family: var(--font-display); font-size: clamp(1.8rem, 3.4vw, 2.7rem); color: var(--navy); font-weight: 700; line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-sub { color: var(--muted); max-width: 620px; font-size: .95rem; }
+
+    /* ===== Carrusel de marcas (doble fila, direcciones opuestas) ===== */
+    #marcas {
+      padding: 4rem 0 4.5rem;
+      background: var(--off-white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .marcas-head { text-align: center; margin-bottom: 2.5rem; }
+    .marcas-head .section-sub,
+    .marcas-head .section-title { margin-left: auto; margin-right: auto; }
+    .marcas-carousel {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+    .marcas-track {
+      display: flex;
+      width: max-content;
+    }
+    /* Fila 1: se desplaza hacia la izquierda */
+    .marcas-track-left { animation: marcasScrollLeft 34s linear infinite; }
+    /* Fila 2: se desplaza hacia la derecha (sentido contrario) */
+    .marcas-track-right { animation: marcasScrollRight 34s linear infinite; }
+    /* El carrusel nunca se detiene, ni al pasar el mouse sobre una marca */
+    .marcas-set {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .marca-logo {
+      flex-shrink: 0;
+      width: 160px;
+      height: 96px;
+      margin: 0 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 8px 22px var(--shadow);
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .marca-logo:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(20,33,61,.16);
+      border-color: var(--accent);
+    }
+    /*
+      📏 TAMAÑO DE CADA LOGO (sin afectar el tamaño del cuadro que se mueve):
+      Por defecto cada logo ocupa 72% de ancho / 58% de alto de su cuadro.
+      Si un logo se ve muy pequeño, agrégale directo en el HTML el atributo
+      style="--logo-scale: 1.4"  (sube el número hasta que se vea bien, ej: 1.2, 1.5, 1.8...)
+      Ejemplo: <img src="marcas/eufar.webp" alt="Eufar" style="--logo-scale: 1.5" />
+      Recuerda hacer el mismo ajuste en las DOS filas (la visible y la fila "aria-hidden"
+      que va debajo, son copias iguales para que el desplazamiento no se corte).
+    */
+    .marca-logo img {
+      max-width: calc(72% * var(--logo-scale, 1));
+      max-height: calc(58% * var(--logo-scale, 1));
+      object-fit: contain;
+      /* Logos a color, tal cual son las marcas */
+    }
+
+    @keyframes marcasScrollLeft {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes marcasScrollRight {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+
+    @media (max-width: 640px) {
+      .marca-logo { width: 118px; height: 74px; margin: 0 .8rem; border-radius: 10px; }
+      .marcas-track-left, .marcas-track-right { animation-duration: 24s; }
+    }
+
+    #quienes { background: var(--off-white); min-height: calc(100vh - 86px); display: flex; align-items: center; padding-top: 3rem; padding-bottom: 3rem; }
+    #quienes .container { width: 100%; }
+    .quienes-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 3rem; align-items: center; margin-top: 2rem; }
+    .quienes-text p { margin-bottom: .8rem; color: var(--muted); font-size: .92rem; }
+
+    /* Checklist de dos columnas (info acomodada estilo referencia) */
+    .quienes-checklist { display: grid; grid-template-columns: repeat(2, 1fr); gap: .7rem 1.2rem; margin: 1.1rem 0; }
+    .check-item { display: flex; align-items: flex-start; gap: .6rem; font-size: .84rem; color: var(--text); font-weight: 500; }
+    .check-item i {
+      flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-dark);
+      display: flex; align-items: center; justify-content: center; font-size: .65rem; margin-top: .1rem;
+    }
+
+    /* Cajas de info tipo "sede" debajo del checklist */
+    .quienes-info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; margin-top: .3rem; }
+    .quienes-info-box { border: 1px solid var(--border); border-radius: 14px; padding: .8rem 1.1rem; background: var(--white); box-shadow: 0 8px 24px var(--shadow); }
+    .quienes-info-box .info-label { display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .3rem; }
+    .quienes-info-box strong { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--navy); }
+
+    /* Antiguos stat-cards (siguen disponibles por si se usan en otra sección) */
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+    .stat-card {
+      background: linear-gradient(145deg, var(--white), rgba(212,223,232,0.28)); border: 1px solid var(--border); border-radius: 16px; padding: 1.2rem; box-shadow: 0 8px 28px var(--shadow);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(20,33,61,.14); }
+    .stat-num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--navy); }
+    .stat-label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: .25rem; }
+
+    /* ===== Carrusel de fotos/videos "Quiénes somos" (lado izquierdo) ===== */
+    .quienes-media { position: relative; }
+    .quienes-badge-top {
+      position: absolute; top: 1.1rem; left: 1.1rem; z-index: 3;
+      background: var(--navy); color: #fff; font-size: .72rem; font-weight: 600;
+      padding: .5rem .9rem; border-radius: 999px; display: flex; align-items: center; gap: .45rem;
+      box-shadow: 0 8px 20px rgba(9,19,43,.35);
+    }
+    .quienes-badge-top i { color: var(--accent-soft); }
+    .quienes-slider {
+      position: relative; width: 100%; height: min(46vh, 400px); border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(20,33,61,.16); border: 1px solid rgba(46,124,225,0.16); background: var(--navy);
+    }
+    .quienes-slide { position: absolute; inset: 0; opacity: 0; animation: quienesFade 20s infinite; }
+    .quienes-slide:nth-child(1) { animation-delay: 0s; }
+    .quienes-slide:nth-child(2) { animation-delay: 5s; }
+    .quienes-slide:nth-child(3) { animation-delay: 10s; }
+    .quienes-slide:nth-child(4) { animation-delay: 15s; }
+    .quienes-slide img, .quienes-slide video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @keyframes quienesFade {
+      0%   { opacity: 0; }
+      4%   { opacity: 1; }
+      21%  { opacity: 1; }
+      26%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    .quienes-badge-stat {
+      position: absolute; right: 1.1rem; bottom: 1.1rem; z-index: 3;
+      background: var(--navy); color: #fff; border-radius: 16px; padding: .9rem 1.2rem;
+      box-shadow: 0 14px 30px rgba(9,19,43,.4);
+    }
+    .quienes-badge-stat strong { display: block; font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--accent-soft); }
+    .quienes-badge-stat span { font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.75); }
+    .quienes-dots {
+      position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%); z-index: 3;
+      display: flex; gap: .4rem;
+    }
+    .quienes-dots .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.45); transition: all .3s ease; }
+    .quienes-dots .dot.active { width: 20px; border-radius: 4px; background: var(--white); }
+
+    #productos { background: var(--white); min-height: calc(100vh - 86px); display: flex; align-items: center; padding-top: 3rem; padding-bottom: 3rem; }
+    #productos .container { width: 100%; }
+
+    /* ===== Productos: pestañas estilo SmartEnergy ===== */
+    .products-tabs { margin-top: 1.8rem; }
+    .products-tab-buttons {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; margin-bottom: 1.4rem;
+    }
+    .product-tab {
+      display: flex; align-items: center; justify-content: space-between; gap: .6rem;
+      text-align: left; cursor: pointer; font-family: var(--font-body);
+      background: var(--off-white); border: 1.5px solid var(--border); border-radius: 16px;
+      padding: .85rem 1.1rem; transition: background .3s ease, border-color .3s ease, transform .2s ease, box-shadow .3s ease;
+    }
+    .product-tab:hover { transform: translateY(-2px); border-color: rgba(46,124,225,0.4); }
+    .product-tab-name { font-family: var(--font-display); font-weight: 700; font-size: .98rem; color: var(--navy); line-height: 1.3; }
+    .product-tab-sub { display: block; font-size: .76rem; color: var(--muted); font-weight: 500; margin-top: .2rem; }
+    .product-tab-num { font-family: var(--font-display); font-weight: 700; font-size: .85rem; color: var(--accent); flex-shrink: 0; }
+    .product-tab.active {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-color: var(--navy); box-shadow: 0 14px 32px rgba(9,19,43,.24);
+    }
+    .product-tab.active .product-tab-name { color: #fff; }
+    .product-tab.active .product-tab-sub { color: rgba(255,255,255,.65); }
+    .product-tab.active .product-tab-num { color: var(--accent-soft); }
+
+    .products-tab-content {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;
+    }
+    .product-panel-tag {
+      display: inline-flex; align-items: center; gap: .4rem; margin-bottom: .8rem; padding: .35rem .85rem;
+      border-radius: 999px; background: var(--accent-soft); color: var(--accent-dark);
+      font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .product-panel-tag i { font-size: .7rem; }
+    .product-panel-desc { color: var(--text); font-size: .92rem; margin-bottom: 1.1rem; }
+    .product-panel-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .55rem;
+    }
+    .product-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.1rem; }
+    .chip {
+      background: var(--gray); color: var(--navy); font-size: .78rem; font-weight: 600;
+      padding: .4rem .85rem; border-radius: 999px;
+    }
+    .product-panel-ideal { font-size: .85rem; color: var(--muted); }
+    .product-panel-ideal strong { color: var(--navy); }
+
+    .product-visual {
+      border-radius: 20px; overflow: hidden; background: var(--off-white);
+      border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(17,34,73,0.14);
+    }
+    .product-visual-header {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light)); color: #fff;
+      padding: .8rem 1.4rem; text-align: center;
+    }
+    .product-visual-header span { font-family: var(--font-display); font-weight: 700; font-size: .95rem; }
+    .product-visual-imgwrap { position: relative; width: 100%; aspect-ratio: 16/10; max-height: 38vh; overflow: hidden; }
+    .product-visual-imgwrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .35s ease;
+    }
+    .product-visual-imgwrap img.fading { opacity: 0; }
+
+    /* ===== Flechas y puntos para mover entre varias fotos de un mismo producto ===== */
+    .visual-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+      width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(9,19,43,0.55); color: #fff; font-size: .85rem;
+      backdrop-filter: blur(4px); transition: background .2s ease, transform .2s ease;
+    }
+    .visual-arrow:hover { background: var(--accent); transform: translateY(-50%) scale(1.08); }
+    .visual-arrow-prev { left: .8rem; }
+    .visual-arrow-next { right: .8rem; }
+    .visual-arrow.hidden { display: none; }
+    .visual-dots {
+      position: absolute; left: 0; right: 0; bottom: .9rem; z-index: 3;
+      display: flex; align-items: center; justify-content: center; gap: .4rem;
+    }
+    .visual-dots.hidden { display: none; }
+    .visual-dot {
+      width: 7px; height: 7px; border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(255,255,255,0.55); padding: 0; transition: background .2s ease, transform .2s ease;
+    }
+    .visual-dot.active { background: #fff; transform: scale(1.25); }
+
+    @media (max-width: 960px) {
+      .products-tab-buttons { grid-template-columns: 1fr; }
+      .products-tab-content { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Brochure descargable ===== */
+    .brochure-box {
+      margin-top: 1.3rem; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem;
+      flex-wrap: wrap; background: var(--off-white); border: 1.5px solid var(--border); border-radius: 16px;
+      padding: .9rem 1.2rem;
+    }
+    .brochure-box-info { display: flex; align-items: center; gap: .9rem; }
+    .brochure-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .brochure-text strong { display: block; font-family: var(--font-display); color: var(--navy); font-size: .95rem; }
+    .brochure-text span { display: block; font-size: .8rem; color: var(--muted); margin-top: .1rem; }
+    .brochure-btn {
+      display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.3rem; border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; text-decoration: none;
+      font-weight: 600; font-size: .85rem; letter-spacing: .02em; white-space: nowrap;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .brochure-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(26,82,168,.24); }
+
+    #servicios { background: var(--gray); min-height: calc(100vh - 86px); display: flex; align-items: center; padding-top: 3rem; padding-bottom: 3rem; }
+    #servicios .container { width: 100%; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.4rem; margin-top: 2rem; }
+    .service-card {
+      background: linear-gradient(145deg, var(--white), rgba(220,232,251,0.5)); border: 1px solid rgba(46,124,225,0.16); border-radius: 18px; padding: 1.5rem; box-shadow: 0 8px 24px rgba(17,34,73,0.12);
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .service-card:hover { transform: translateY(-6px); border-color: rgba(46,124,225,0.35); box-shadow: 0 18px 44px rgba(20,33,61,.14); }
+    .service-icon {
+      width: 48px; height: 48px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(46,124,225,0.14); color: var(--accent-dark); margin-bottom: 1rem;
+    }
+    .service-name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: .45rem; }
+    .service-desc { color: var(--muted); font-size: .86rem; }
+
+    #contacto { background: var(--white); min-height: calc(100vh - 86px); display: flex; align-items: center; padding-top: 3rem; padding-bottom: 3rem; }
+    #contacto .container { width: 100%; }
+    .contacto-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 2.4rem; align-items: start; margin-top: 2rem; }
+    .contacto-card {
+      background: linear-gradient(145deg, var(--white), #f2f7ff); border: 1px solid rgba(46,124,225,0.16); border-radius: 20px; padding: 1.3rem; box-shadow: 0 10px 30px rgba(17,34,73,0.12);
+    }
+    .contacto-dato { display: flex; gap: .9rem; align-items: center; margin-top: .8rem; }
+    .contacto-dato i { width: 38px; height: 38px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--navy); color: white; }
+    .contacto-dato strong { display: block; color: var(--muted); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+    .contacto-dato span { font-weight: 600; color: var(--navy); }
+    .contacto-form { display: flex; flex-direction: column; gap: .8rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    .form-input {
+      width: 100%; border: 1.5px solid var(--border); border-radius: 12px; padding: .75rem .9rem; background: var(--white);
+      font-family: var(--font-body); font-size: .92rem; color: var(--text); outline: none; transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,124,225,.14); }
+    textarea.form-input { min-height: 90px; resize: vertical; }
+    .btn-enviar {
+      align-self: flex-start; border: none; background: var(--navy); color: white; border-radius: 999px; padding: .9rem 1.4rem; cursor: pointer;
+      font-family: var(--font-body); font-weight: 600; transition: transform .2s ease, background .2s ease;
+    }
+    .btn-enviar:hover { transform: translateY(-2px); background: var(--navy-light); }
+
+    footer { background: var(--navy-deep); color: rgba(255,255,255,0.7); padding: 4rem 4rem 2rem; overflow: visible; }
+    .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+    .footer-col:first-child { position: relative; padding-top: calc(var(--footer-logo-size) + 1rem); }
+    .footer-logo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: var(--footer-logo-size);
+      width: auto;
+    }
+    .footer-col:first-child p { margin-top: 0; }
+    .footer-col h4 { color: var(--accent-soft); font-size: .74rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    .footer-col a:hover { color: var(--accent-soft); }
+    .founder-carousel {
+      position: relative; width: 100%; max-width: 190px; aspect-ratio: 3 / 4;
+      border-radius: 14px; overflow: hidden; margin-bottom: .9rem;
+      box-shadow: 0 14px 30px rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.1);
+    }
+    .founder-slide { position: absolute; inset: 0; opacity: 0; animation: founderFade 16s infinite; }
+    .founder-slide:nth-child(1) { animation-delay: 0s; }
+    .founder-slide:nth-child(2) { animation-delay: 8s; }
+    @keyframes founderFade {
+      0%   { opacity: 0; }
+      8%   { opacity: 1; }
+      42%  { opacity: 1; }
+      50%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    .founder-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .founder-caption strong { display: block; color: #fff; font-size: .86rem; font-weight: 700; }
+    .founder-caption span { display: block; font-size: .74rem; color: rgba(255,255,255,.6); margin-top: .15rem; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.3rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font-size: .78rem; }
+
+    .insta-float {
+      position: fixed; right: 1.5rem; bottom: 6.8rem; z-index: 998; width: 56px; height: 56px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+      box-shadow: 0 10px 24px rgba(214,36,159,0.24); transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .insta-float:hover { transform: scale(1.08); box-shadow: 0 14px 30px rgba(214,36,159,0.3); }
+    .insta-float svg { width: 24px; height: 24px; fill: #fff; }
+    .wpp-float {
+      position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 998; width: 58px; height: 58px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center; background: #25d366; color: white; box-shadow: 0 10px 28px rgba(37,211,102,.28);
+      text-decoration: none; animation: wppPulse 2.5s ease-in-out infinite;
+      transition: transform .2s ease;
+    }
+    .wpp-float:hover { transform: scale(1.08); }
+    @keyframes wppPulse { 0%,100% { box-shadow: 0 10px 28px rgba(26,125,74,.35); } 50% { box-shadow: 0 10px 28px rgba(26,125,74,.35), 0 0 0 12px rgba(26,125,74,.08); } }
+
+    .reveal, .reveal-left, .reveal-right, .reveal-scale {
+      opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal-left { transform: translateX(-50px); }
+    .reveal-right { transform: translateX(50px); }
+    .reveal-scale { transform: scale(.95); }
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
+      opacity: 1; transform: translate(0, 0) scale(1);
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    @media (max-width: 960px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .quienes-grid, .contacto-grid { grid-template-columns: 1fr; }
+      .products-grid, .services-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      #quienes, #antes-despues, #productos, #servicios, #combos, #contacto {
+        min-height: 0; padding-top: 4rem; padding-bottom: 4rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 4.5rem 1.2rem; }
+      .products-grid, .services-grid, .stats-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-desc { max-width: none; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .quienes-checklist { grid-template-columns: 1fr; }
+      .quienes-slider { height: 300px; }
+      .quienes-badge-stat strong { font-size: 1.2rem; }
+    }
+
+    /* ===================== ANTES Y DESPUÉS ===================== */
+    #antes-despues { background: var(--off-white); min-height: calc(100vh - 86px); display: flex; align-items: center; padding-top: 3rem; padding-bottom: 3rem; }
+    #antes-despues .container { width: 100%; }
+    .ad-carousel { position: relative; margin-top: 2rem; }
+    .ad-track {
+      display: flex; gap: 1.3rem; overflow-x: auto;
+      padding: .5rem .5rem 1.2rem; scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .ad-track::-webkit-scrollbar { display: none; }
+    .ad-card {
+      flex: 0 0 auto; scroll-snap-align: start; width: 230px; position: relative;
+      background: var(--navy); border-radius: 26px; overflow: hidden;
+      box-shadow: 0 16px 44px rgba(20,33,61,.18); border: 1px solid rgba(46,124,225,0.16);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .ad-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(20,33,61,.26); }
+    .ad-card img {
+      width: 100%; height: min(48vh, 400px); object-fit: cover; object-position: center; display: block; background: var(--navy);
+    }
+    .ad-overlay {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 1.5rem 1.2rem 1.1rem;
+      background: linear-gradient(180deg, rgba(9,19,43,0) 0%, rgba(9,19,43,.5) 55%, rgba(9,19,43,.92) 100%);
+      pointer-events: none;
+    }
+    .ad-eyebrow { display: block; color: var(--accent-soft); font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .3rem; }
+    .ad-overlay strong { display: block; font-family: var(--font-display); color: #fff; font-size: 1.02rem; font-weight: 700; }
+    @media (max-width: 640px) {
+      .ad-card { width: 78vw; }
+      .ad-card img { height: 66vh; max-height: 480px; }
+    }
+
+    /* ===================== PROCESO (REVISIONES + EXOCAD) ===================== */
+    /* Ocupa exactamente el alto de pantalla disponible (100vh menos el nav de 86px) */
+    #proceso {
+      background: var(--navy);
+      min-height: calc(100vh - 86px);
+      display: flex;
+      align-items: center;
+      padding: 2.5rem 4rem;
+    }
+    #proceso .container { width: 100%; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+    #proceso .section-label { color: var(--accent-soft); }
+    #proceso .section-title { color: var(--white); }
+    #proceso .section-sub { color: rgba(255,255,255,.68); }
+    .proceso-block { margin-top: 1.8rem; width: 100%; display: flex; flex-direction: column; align-items: flex-start; }
+    .proceso-heading { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.5rem; color: var(--accent-soft); font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+    .proceso-heading i { color: var(--accent); }
+    /* Tarjetas verticales, tipo teléfono pero no exageradas: 4 en fila, altura limitada por vh para que siempre quepan */
+    .video-grid { display: flex; justify-content: flex-start; align-items: stretch; gap: 1.3rem; flex-wrap: wrap; width: 100%; }
+    .video-card {
+      position: relative; border-radius: 18px; overflow: hidden; background: #000;
+      border: 1px solid rgba(255,255,255,0.12);
+      height: min(46vh, 400px); width: auto; aspect-ratio: 3/4;
+    }
+    .video-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .video-caption { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: .9rem .9rem .8rem; background: linear-gradient(0deg, rgba(0,0,0,.82), transparent); color: #fff; font-size: .78rem; font-weight: 600; line-height: 1.25; text-align: left; }
+    @media (max-width: 960px) {
+      #proceso { min-height: 0; padding: 4.5rem 1.5rem; }
+      .video-card { height: min(42vh, 320px); }
+    }
+    @media (max-width: 640px) {
+      .video-grid { gap: 1rem; flex-direction: column; align-items: stretch; }
+      .video-card { width: 100%; height: auto; max-height: 60vh; }
+    }
+
+    /* ===================== COMBOS Y EQUIPOS ===================== */
+    #combos { background: var(--off-white); min-height: calc(100vh - 86px); display: flex; align-items: center; padding-top: 3rem; padding-bottom: 3rem; }
+    #combos .container { width: 100%; }
+    .combos-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.4rem; margin-top: 2rem; align-items: stretch; max-width: 1100px; margin-left: auto; margin-right: auto; }
+    .combo-card {
+      display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+      box-shadow: 0 10px 32px rgba(17,34,73,0.1); transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .combo-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(20,33,61,.16); }
+    .combo-card.featured { border: 2px solid var(--accent); position: relative; }
+    .combo-featured-tag { position: absolute; top: 0; right: 0; background: var(--accent); color: #fff; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .4rem .9rem; border-bottom-left-radius: 12px; }
+    .combo-image { width: 100%; height: 190px; object-fit: cover; display: block; }
+    .combo-image.combo-slideshow { position: relative; padding: 0; overflow: hidden; }
+    .combo-image.combo-slideshow img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity 1.2s ease-in-out;
+    }
+    .combo-image.combo-slideshow img.is-active { opacity: 1; }
+    .combo-body { padding: 1.2rem; display: flex; flex-direction: column; gap: .7rem; flex: 1; }
+    .combo-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+    .combo-desc { color: var(--muted); font-size: .86rem; }
+    .combo-price { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--accent-dark); }
+    .combo-price span { font-size: .7rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; display: block; }
+    .combo-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; flex: 1; }
+    .combo-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .86rem; color: var(--text); }
+    .combo-list i { color: var(--accent); margin-top: .2rem; }
+    .combo-cta { text-align: center; text-decoration: none; padding: .85rem 1rem; border-radius: 999px; font-weight: 600; font-size: .88rem; background: var(--navy); color: #fff; transition: transform .2s ease, background .2s ease; border: none; cursor: pointer; font-family: inherit; width: 100%; }
+    .combo-cta:hover { transform: translateY(-2px); background: var(--navy-light); }
+    .combo-card.featured .combo-cta { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); }
+    @media (max-width: 960px) { .combos-grid { grid-template-columns: 1fr; } }
+
+    /* ===== Modal de detalle de combo (Más información) — estilo catálogo ===== */
+    .combo-modal-backdrop {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(9,19,43,.75); backdrop-filter: blur(6px);
+      display: none; align-items: center; justify-content: center;
+      padding: 5vh 2vw;
+    }
+    .combo-modal-backdrop.is-open { display: flex; }
+    .combo-modal {
+      position: relative; width: 100%; max-width: 1300px; height: 90vh;
+      background: var(--white); border-radius: 24px; overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 40px 90px rgba(9,19,43,.45);
+      animation: comboModalIn .3s ease;
+    }
+    @keyframes comboModalIn { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    .combo-modal-topbar {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 1rem 1.6rem; display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .combo-modal-breadcrumb { font-size: .8rem; color: var(--muted); font-family: var(--font-body); }
+    .combo-modal-breadcrumb span { color: var(--navy); font-weight: 600; }
+    .combo-modal-close {
+      width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--border); background: transparent;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); font-size: 1.1rem;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .combo-modal-close:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    .combo-modal-main {
+      flex: 1; min-height: 0; overflow-y: auto;
+      display: grid; grid-template-columns: 1.15fr 1fr;
+    }
+    .combo-modal-gallery {
+      padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem;
+      border-right: 1px solid var(--border); background: var(--off-white); min-height: 0;
+    }
+    .combo-modal-main-img-wrap {
+      flex: 1; min-height: 0; border-radius: 16px; overflow: hidden;
+      background: var(--navy); display: flex; align-items: center; justify-content: center;
+    }
+    .combo-modal-main-img { width: 100%; height: 100%; object-fit: contain; display: block; transition: opacity .3s ease; }
+    .combo-modal-thumbs { display: flex; gap: .6rem; flex-wrap: wrap; flex-shrink: 0; }
+    .combo-modal-thumb {
+      width: 70px; height: 70px; border-radius: 10px; overflow: hidden; border: 2px solid var(--border);
+      cursor: pointer; transition: border-color .2s, transform .2s; flex-shrink: 0; background: var(--navy);
+    }
+    .combo-modal-thumb:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .combo-modal-thumb.active { border-color: var(--accent-dark); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .combo-modal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .combo-modal-info { padding: 2.2rem; display: flex; flex-direction: column; gap: 1.3rem; overflow-y: auto; }
+    .combo-modal-badge {
+      display: inline-flex; align-items: center; gap: .4rem; width: fit-content;
+      background: var(--accent-soft); border: 1px solid rgba(46,124,225,.35); color: var(--accent-dark);
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      padding: .3rem .85rem; border-radius: 100px;
+    }
+    .combo-modal-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--navy); line-height: 1.2; }
+    .combo-modal-divider { height: 1px; background: var(--border); }
+    .combo-modal-desc { color: var(--muted); font-size: .95rem; line-height: 1.8; }
+    .combo-modal-features-title { font-family: var(--font-display); font-size: .82rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .5rem; }
+    .combo-modal-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .combo-modal-chip {
+      display: flex; align-items: center; gap: .4rem; background: var(--accent-soft);
+      border: 1px solid var(--border); border-radius: 8px; padding: .45rem .85rem; font-size: .82rem;
+      color: var(--navy); font-weight: 500;
+    }
+    .combo-modal-chip i { color: var(--accent-dark); font-size: .78rem; }
+    .combo-modal-cta-box {
+      margin-top: auto; background: var(--off-white); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.4rem; display: flex; flex-direction: column; gap: .8rem;
+    }
+    .combo-modal-cta-label { font-size: .82rem; color: var(--muted); }
+    .combo-modal-cta-label strong { color: var(--navy); font-weight: 700; }
+    .combo-modal-wpp {
+      background: #1a7d4a; color: #fff; display: flex; align-items: center; justify-content: center; gap: .7rem;
+      padding: .95rem 1.8rem; border-radius: 12px; font-weight: 700; font-size: .95rem; text-decoration: none;
+      transition: background .2s, transform .15s, box-shadow .2s; font-family: var(--font-body);
+    }
+    .combo-modal-wpp:hover { background: #1db954; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,.4); }
+    .combo-modal-wpp i { font-size: 1.2rem; }
+
+    @media (max-width: 860px) {
+      .combo-modal-backdrop { padding: 0; }
+      .combo-modal { height: 100vh; max-height: 100vh; border-radius: 0; }
+      .combo-modal-main { grid-template-columns: 1fr; }
+      .combo-modal-gallery { border-right: none; border-bottom: 1px solid var(--border); }
+      .combo-modal-main-img-wrap { min-height: 260px; }
+    }
+  </style>
+</head>
+<body>
+    <nav id="navbar">
+    <a href="#hero" class="nav-logo"><img src="logo1.png" alt="DannyDent" /></a>
+    <ul class="nav-links">
+      <li><a href="#quienes">Nosotros</a></li>
+      <li><a href="#antes-despues">Casos</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#combos">Combos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#contacto" class="nav-cta">Envíanos tu caso</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="video1.MOV" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge reveal">Laboratorio dental digital</div>
+      <h1 class="hero-title reveal reveal-delay-1"><span class="accent-blue">Danny</span><span class="accent">Dent</span></h1>
+      <p class="hero-slogan reveal reveal-delay-2">Precisión, estética y tecnología para cada restauración.</p>
+      <p class="hero-desc reveal reveal-delay-3">Fabricamos coronas, carillas, prótesis y soluciones digitales para clínicas que exigen excelencia y tiempos garantizados.</p>
+      <div class="hero-actions reveal reveal-delay-4">
+        <a href="#productos" class="btn-primary">Ver productos</a>
+        <a href="#contacto" class="btn-outline">Solicitar cotización</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section id="quienes">
+    <div class="container">
+      <div class="section-label reveal">Quiénes somos</div>
+      <h2 class="section-title reveal reveal-delay-1">Innovación dental hecha con precisión y criterio estético.</h2>
+      <div class="quienes-grid">
+
+        <!--
+          🎞️ CARRUSEL DE FOTOS Y VIDEOS (Quiénes somos):
+          Coloca tus archivos en una carpeta "quienes/" junto al HTML y
+          cambia los "src" de abajo. Puedes mezclar fotos (<img>) y videos
+          (<video autoplay muted loop playsinline>) sin problema, cada uno
+          es un ".quienes-slide". Van pasando solos con animación (fade),
+          uno cada 5 segundos. Si agregas o quitas slides, ajusta también
+          en el CSS las reglas ".quienes-slide:nth-child(n)" con su
+          "animation-delay" (deben repartirse en partes iguales dentro de
+          los 20s totales) y agrega/quita un <span class="dot"></span> en
+          ".quienes-dots" para que coincidan en cantidad.
+        -->
+        <div class="quienes-media reveal reveal-left">
+          <div class="quienes-slider">
+            <div class="quienes-slide">
+              <video src="quienes/video3.mov" autoplay muted loop playsinline></video>
+            </div>
+            <div class="quienes-slide">
+              <img src="quienes/foto1.jpg" alt="Equipo DannyDent" />
+            </div>
+            <div class="quienes-slide">
+              <video src="quienes/scaneo.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="quienes-slide">
+              <video src="quienes/video2.mov" autoplay muted loop playsinline></video>
+            </div>
+          </div>
+          <div class="quienes-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+
+        <div class="quienes-text reveal reveal-right">
+          <p>DannyDent nace para llevar la odontología restauradora a un nuevo nivel. Combinamos tecnología CAD/CAM, escaneo digital y materiales premium para entregar resultados naturales y confiables.</p>
+          <p>Trabajamos con flujo digital completo, desde el escaneo hasta la entrega final, con asesoría técnica y tiempos garantizados para que tu clínica opere sin contratiempos.</p>
+
+          <div class="quienes-checklist">
+            <div class="check-item"><i class="fa-solid fa-check"></i> Tecnología CAD/CAM de última generación</div>
+            <div class="check-item"><i class="fa-solid fa-check"></i> Escaneo intraoral digital</div>
+            <div class="check-item"><i class="fa-solid fa-check"></i> Impresión 3D de alta precisión</div>
+            <div class="check-item"><i class="fa-solid fa-check"></i> Materiales premium certificados</div>
+            <div class="check-item"><i class="fa-solid fa-check"></i> Asesoría técnica permanente</div>
+            <div class="check-item"><i class="fa-solid fa-check"></i> Tiempos de entrega garantizados</div>
+          </div>
+
+          <div class="quienes-info-grid">
+            <div class="quienes-info-box">
+              <span class="info-label">Clínicas aliadas</span>
+              <strong>30+</strong>
+            </div>
+            <div class="quienes-info-box">
+              <span class="info-label">Satisfacción</span>
+              <strong>100%</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="antes-despues">
+    <div class="container">
+      <div class="section-label reveal">Estética en los diseños</div>
+      <h2 class="section-title reveal reveal-delay-1">La excelencia está en cada detalle.</h2>
+      <p class="section-sub reveal reveal-delay-2">Resultados reales de pacientes tratados con nuestras restauraciones. Observa la transformación.</p>
+
+      <!--
+        🖼️ CÓMO AGREGAR MÁS CASOS:
+        Cada .ad-card es UNA foto completa (tu foto ya trae el antes y el después juntos,
+        formato vertical de celular). Cambia el "src" por tu nueva foto, y el texto
+        dentro de .ad-overlay (eyebrow + título) por lo que quieras describir de ese caso.
+        No hay límite de cuántos agregues, la galería se desliza horizontalmente.
+        Si alguna foto sobra, simplemente borra su bloque .ad-card completo.
+      -->
+      <div class="ad-carousel reveal reveal-scale">
+        <div class="ad-track" id="adTrack">
+          <div class="ad-card">
+            <img src="antes-despues/caso1.png" alt="Antes y después - caso de restauración dental" />
+            <div class="ad-overlay"><span class="ad-eyebrow">Caso clínico</span><strong>Rehabilitación estética</strong></div>
+          </div>
+          <div class="ad-card">
+            <img src="antes-despues/caso2.png" alt="Antes y después - caso de restauración dental" />
+            <div class="ad-overlay"><span class="ad-eyebrow">Caso clínico</span><strong>Restauración anterior</strong></div>
+          </div>
+          <div class="ad-card">
+            <img src="antes-despues/caso3.png" alt="Antes y después - caso de restauración dental" />
+            <div class="ad-overlay"><span class="ad-eyebrow">Caso clínico</span><strong>Carillas de disilicato</strong></div>
+          </div>
+          <div class="ad-card">
+            <img src="antes-despues/caso4.png" alt="Antes y después - caso de restauración dental" />
+            <div class="ad-overlay"><span class="ad-eyebrow">Caso clínico</span><strong>Coronas en zirconio</strong></div>
+          </div>
+          <div class="ad-card">
+            <img src="antes-despues/caso5.png" alt="Antes y después - caso de restauración dental" />
+            <div class="ad-overlay"><span class="ad-eyebrow">Caso clínico</span><strong>Diseño de sonrisa</strong></div>
+          </div>
+          <div class="ad-card">
+            <img src="antes-despues/caso6.png" alt="Antes y después - caso de restauración dental" />
+            <div class="ad-overlay"><span class="ad-eyebrow">Caso clínico</span><strong>Rehabilitación completa</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="productos">
+    <div class="container">
+      <div class="section-label reveal">Productos</div>
+      <h2 class="section-title reveal reveal-delay-1">Soluciones de alta estética y funcionalidad.</h2>
+      <p class="section-sub reveal reveal-delay-2">Cada pieza se fabrica con materiales premium y tecnología digital de última generación para asegurar ajuste, resistencia y naturalidad.</p>
+      <div class="products-tabs reveal reveal-delay-2">
+        <div class="products-tab-buttons">
+          <button
+            class="product-tab active"
+            data-tag="Premium"
+            data-icon="fa-solid fa-crown"
+            data-desc="Restauraciones monolíticas y estratificadas con translucidez natural y alto rendimiento mecánico. Máxima resistencia para casos que exigen durabilidad a largo plazo."
+            data-materiales="Zirconio monolítico,Zirconio estratificado,Alta resistencia"
+            data-ideal="coronas posteriores, puentes largos y pacientes con bruxismo."
+            data-img="img/zincrono-monolitico.jpg,img/zincrono-multiplayer.jpg"
+            data-titulo="Coronas y carillas en zirconio"
+          >
+            <span>
+              <span class="product-tab-name">Coronas y carillas en zirconio</span>
+              <span class="product-tab-sub">Máxima resistencia</span>
+            </span>
+            <span class="product-tab-num">01</span>
+          </button>
+
+          <button
+            class="product-tab"
+            data-tag="Alta estética"
+            data-icon="fa-solid fa-gem"
+            data-desc="Ideal para sectores anteriores con máxima transparencia y naturalidad visual. Reproduce la translucidez del esmalte natural para resultados imperceptibles."
+            data-materiales="Disilicato de litio,Alta translucidez,Sector anterior"
+            data-ideal="carillas, coronas anteriores y casos donde la estética es prioridad."
+            data-img="img/disilicato-de-litio.jpg"
+            data-titulo="Disilicato de litio"
+          >
+            <span>
+              <span class="product-tab-name">Disilicato de litio</span>
+              <span class="product-tab-sub">Naturalidad visual</span>
+            </span>
+            <span class="product-tab-num">02</span>
+          </button>
+
+          <button
+            class="product-tab"
+            data-tag="Tecnología 3D"
+            data-icon="fa-solid fa-cube"
+            data-desc="Precisión de ajuste, excelente acabado y tiempos cortos para provisionales y modelos de trabajo. Fabricación digital con impresión 3D de última generación."
+            data-materiales="Impresión 3D,Provisionales,Modelos de trabajo"
+            data-ideal="provisionales, guías quirúrgicas y modelos de estudio rápidos."
+            data-img="img/3d.png"
+            data-titulo="Cerómero impreso 3D"
+          >
+            <span>
+              <span class="product-tab-name">Cerómero impreso 3D</span>
+              <span class="product-tab-sub">Rápido y preciso</span>
+            </span>
+            <span class="product-tab-num">03</span>
+          </button>
+        </div>
+
+        <div class="products-tab-content">
+          <div class="product-panel-info">
+            <div class="product-panel-tag" id="prodTag"><i class="fa-solid fa-crown"></i> <span id="prodTagText">Premium</span></div>
+            <p class="product-panel-desc" id="prodDesc">Restauraciones monolíticas y estratificadas con translucidez natural y alto rendimiento mecánico. Máxima resistencia para casos que exigen durabilidad a largo plazo.</p>
+            <div class="product-panel-label">Materiales</div>
+            <div class="product-chips" id="prodChips">
+              <span class="chip">Zirconio monolítico</span>
+              <span class="chip">Zirconio estratificado</span>
+              <span class="chip">Alta resistencia</span>
+            </div>
+            <p class="product-panel-ideal"><strong>Ideal para:</strong> <span id="prodIdeal">coronas posteriores, puentes largos y pacientes con bruxismo.</span></p>
+
+            <div class="brochure-box">
+              <div class="brochure-box-info">
+                <div class="brochure-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                <div class="brochure-text">
+                  <strong>¿Quieres ver todo nuestro catálogo?</strong>
+                  <span>Descarga nuestro brochure aquí</span>
+                </div>
+              </div>
+              <a class="brochure-btn" href="BDD.pdf" download="DannyDent-Brochure.pdf">
+                <i class="fa-solid fa-download"></i> Descargar PDF
+              </a>
+            </div>
+          </div>
+
+          <div class="product-visual">
+            <div class="product-visual-header"><span id="prodVisualTitle">Coronas y carillas en zirconio</span></div>
+            <div class="product-visual-imgwrap">
+              <img id="prodVisualImg" src="img/zincrono-monolitico.jpg" alt="Coronas y carillas en zirconio" />
+              <button type="button" class="visual-arrow visual-arrow-prev hidden" id="prodVisualPrev" aria-label="Foto anterior">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button type="button" class="visual-arrow visual-arrow-next hidden" id="prodVisualNext" aria-label="Foto siguiente">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+              <div class="visual-dots hidden" id="prodVisualDots"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proceso">
+    <div class="container">
+      <div class="section-label reveal">Nuestro proceso</div>
+      <h2 class="section-title reveal reveal-delay-1">Del diseño a la sonrisa terminada.</h2>
+      <!--
+        🎬 CÓMO REEMPLAZAR LOS VIDEOS (REVISIONES + EXOCAD):
+        Cada .video-card es UN video. Se reproducen solos, en silencio y en bucle
+        (como el video del hero), no necesitan click ni miniatura. Solo cambia el
+        "src" del <source> por tu archivo real.
+        - Videos de revisiones: carpeta "revisiones/", ej: revisiones/revision-1.mp4
+        - Videos de Exocad: carpeta "exocad/", ej: exocad/exocad-diseno-1.mp4
+        Son 4 tarjetas fijas (formato vertical). Si agregas o quitas alguna,
+        recuerda que la grilla está pensada para 4 en fila en escritorio.
+      -->
+      <div class="proceso-block">
+        <div class="proceso-heading reveal"><i class="fa-solid fa-desktop"></i> Revisiones y diseño digital en Exocad</div>
+        <div class="video-grid">
+          <div class="video-card reveal reveal-scale">
+            <video autoplay muted loop playsinline preload="auto">
+              <source src="exocad/runyes1.mov" type="video/mp4" />
+            </video>
+            <div class="video-caption">Revisión de ajuste</div>
+          </div>
+          <div class="video-card reveal reveal-scale reveal-delay-1">
+            <video autoplay muted loop playsinline preload="auto">
+              <source src="exocad/runyes3.mp4" type="video/mp4" />
+            </video>
+            <div class="video-caption">Control de calidad</div>
+          </div>
+          <div class="video-card reveal reveal-scale reveal-delay-2">
+            <video autoplay muted loop playsinline preload="auto">
+              <source src="exocad/exocad-1.mp4" type="video/mp4" />
+            </video>
+            <div class="video-caption">Diseño de corona en Exocad</div>
+          </div>
+          <div class="video-card reveal reveal-scale reveal-delay-3">
+            <video autoplay muted loop playsinline preload="auto">
+              <source src="exocad/exocad-2.mp4" type="video/mp4" />
+            </video>
+            <div class="video-caption">Ajuste digital de carillas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios">
+    <div class="container">
+      <div class="section-label reveal">Servicios</div>
+      <h2 class="section-title reveal reveal-delay-1">Todo lo que tu clínica necesita para trabajar mejor.</h2>
+      <p class="section-sub reveal reveal-delay-2">Flujo digital completo, asesoría técnica y entregas puntuales para que cada caso salga con la mejor calidad posible.</p>
+      <div class="services-grid">
+        <article class="service-card reveal reveal-scale">
+          <div class="service-icon"><i class="fa-solid fa-cube"></i></div>
+          <h3 class="service-name">Impresión 3D</h3>
+          <p class="service-desc">Modelos, guías, provisionales y restauraciones impresas con alta resolución y precisión.</p>
+        </article>
+        <article class="service-card reveal reveal-scale reveal-delay-1">
+          <div class="service-icon"><i class="fa-solid fa-microscope"></i></div>
+          <h3 class="service-name">Escaneo y CAD/CAM</h3>
+          <p class="service-desc">Recibimos archivos STL y trabajamos con procesos digitales para fresado y diseño detallado.</p>
+        </article>
+        <article class="service-card reveal reveal-scale reveal-delay-2">
+          <div class="service-icon"><i class="fa-solid fa-gears"></i></div>
+          <h3 class="service-name">Servicio de fresado y sinterizado de zirconio</h3>
+          <p class="service-desc">Fresado de precisión y sinterizado de zirconio para laboratorios y clínicas que necesitan este proceso tercerizado con calidad garantizada.</p>
+        </article>
+        <article class="service-card reveal reveal-scale reveal-delay-3">
+          <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+          <h3 class="service-name">Asesoría técnica</h3>
+          <p class="service-desc">Acompañamiento en tonos, selección de materiales y recomendaciones para cada caso clínico.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="combos">
+    <div class="container">
+      <div class="section-label reveal">Combos y equipos</div>
+      <h2 class="section-title reveal reveal-delay-1">Lleva tu clínica al flujo digital.</h2>
+      <p class="section-sub reveal reveal-delay-2">Paquetes con scanner intraoral, equipo de cómputo y asesoría técnica incluida para que empieces a escanear ya mismo.</p>
+
+      <!--
+        💼 CÓMO REEMPLAZAR LAS FOTOS/PRECIOS DE LOS COMBOS:
+        Cambia el "src" de .combo-image por tu foto real (equipo, scanner en uso, etc.)
+        Cambia el texto de .combo-price por el valor real, o deja "Cotiza aquí" si prefieres
+        no publicar precio. El detalle completo (descripción y qué incluye) se edita en el
+        objeto "comboData" dentro del <script>, ya que se muestra en el modal "Más información".
+        Marca "featured" en el combo que quieras destacar (el que quieres vender más).
+      -->
+      <div class="combos-grid">
+        <article class="combo-card reveal reveal-scale">
+          <div class="combo-image combo-slideshow" role="img" aria-label="Scanner intraoral Runyes">
+            <img src="img/runyes/runyes0.jpg" alt="Scanner intraoral Runyes - foto 0" class="is-active" />
+            <img src="img/runyes/runyes1.jpeg" alt="Scanner intraoral Runyes - foto 1" />
+            <img src="img/runyes/runyes2.jpeg" alt="Scanner intraoral Runyes - foto 2" />
+            <img src="img/runyes/runyes3.jpeg" alt="Scanner intraoral Runyes - foto 3" />
+            <img src="img/runyes/runyes4.jpeg" alt="Scanner intraoral Runyes - foto 4" />
+            <img src="img/runyes/runyes5.jpeg" alt="Scanner intraoral Runyes - foto 5" />
+          </div>
+          <div class="combo-body">
+            <h3 class="combo-name">Combo Inicial</h3>
+            <div class="combo-price">Cotiza aquí<span>Precio según equipo</span></div>
+            <button class="combo-cta" data-combo="runyes">Más información</button>
+          </div>
+        </article>
+        <article class="combo-card featured reveal reveal-scale reveal-delay-1">
+          <div class="combo-featured-tag">Más elegido</div>
+          <div class="combo-image combo-slideshow" role="img" aria-label="Combo Digital Pro - Scanner y PC">
+            <img src="img/runyes/combopc.jpg" alt="Combo Digital Pro - foto 1" class="is-active" />
+            <img src="img/runyes/runyes1.jpeg" alt="Combo Digital Pro - foto 2" />
+            <img src="img/runyes/runyes5.jpeg" alt="Combo Digital Pro - foto 3" />
+            <img src="img/runyes/acer1.jpg" alt="Combo Digital Pro - foto 4" />
+            <img src="img/runyes/acer2.jpg" alt="Combo Digital Pro - foto 5" />
+          </div>
+          <div class="combo-body">
+            <h3 class="combo-name">Combo Digital Pro</h3>
+            <div class="combo-price">Cotiza aquí<span>Precio según equipo</span></div>
+            <button class="combo-cta" data-combo="pro">Más información</button>
+          </div>
+        </article>
+        <article class="combo-card reveal reveal-scale reveal-delay-2">
+          <div class="combo-image combo-slideshow" role="img" aria-label="Equipo de rayos X portátil">
+            <img src="img/runyes/cam1.JPG" alt="Rayos X portátil - foto 1" class="is-active" />
+            <img src="img/runyes/cam2.JPG" alt="Rayos X portátil - foto 2" />
+            <img src="img/runyes/cam3.JPG" alt="Rayos X portátil - foto 3" />
+            <img src="img/runyes/cam4.JPG" alt="Rayos X portátil - foto 4" />
+            <img src="img/runyes/cam5.JPG" alt="Rayos X portátil - foto 5" />
+          </div>
+          <div class="combo-body">
+            <h3 class="combo-name">Rayos X Portátil</h3>
+            <div class="combo-price">Cotiza aquí<span>Precio según equipo</span></div>
+            <button class="combo-cta" data-combo="rayosx">Más información</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    🔍 MODAL "MÁS INFORMACIÓN" DE CADA COMBO:
+    El contenido (título, texto, fotos y qué incluye) de cada combo vive en el objeto
+    "comboData" dentro del <script> al final de la página. Ahí puedes:
+    - Cambiar el texto descriptivo largo (cómo funciona el equipo).
+    - Agregar o quitar fotos en el arreglo "images" (se muestran grandes, con miniaturas debajo).
+    - Cambiar el mensaje que se envía por WhatsApp al dar clic en "Cotiza tu equipo".
+  -->
+  <div class="combo-modal-backdrop" id="comboModal" aria-hidden="true">
+    <div class="combo-modal" role="dialog" aria-modal="true" aria-labelledby="comboModalTitle">
+      <div class="combo-modal-topbar">
+        <span class="combo-modal-breadcrumb">Combos y equipos / <span id="comboModalBreadcrumb">Combo</span></span>
+        <button class="combo-modal-close" data-modal-close aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="combo-modal-main">
+        <div class="combo-modal-gallery">
+          <div class="combo-modal-main-img-wrap">
+            <img class="combo-modal-main-img" id="comboModalMainImg" src="" alt="">
+          </div>
+          <div class="combo-modal-thumbs" id="comboModalThumbs"></div>
+        </div>
+        <div class="combo-modal-info">
+          <span class="combo-modal-badge" id="comboModalEyebrow">Equipo</span>
+          <h2 class="combo-modal-title" id="comboModalTitle">Título del combo</h2>
+          <div class="combo-modal-divider"></div>
+          <p class="combo-modal-desc" id="comboModalDesc">Descripción del combo.</p>
+          <div>
+            <p class="combo-modal-features-title">Incluye</p>
+            <div class="combo-modal-chips" id="comboModalChips"></div>
+          </div>
+          <div class="combo-modal-cta-box">
+            <p class="combo-modal-cta-label">¿Te interesa? <strong>Cotiza tu equipo sin compromiso</strong></p>
+            <a class="combo-modal-wpp" id="comboModalWppBtn" href="#" target="_blank" rel="noopener">
+              <i class="fa-brands fa-whatsapp"></i> Cotiza tu equipo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    🏷️ CARRUSEL DE MARCAS:
+    Coloca todos tus logos dentro de una carpeta "marcas/" junto al HTML
+    (por ejemplo marcas/acteon.png, marcas/vita.png, etc.) y cambia el "src"
+    de cada <img> por el nombre real de tu archivo. Cada fila repite la
+    MISMA lista de marcas 2 veces (marcas-set) para que el desplazamiento
+    sea infinito y sin cortes. Si agregas o quitas una marca, hazlo en las
+    4 listas (2 por fila) con exactamente los mismos logos y en el mismo orden.
+  -->
+  <section id="marcas">
+    <div class="marcas-head container">
+      <div class="section-label reveal">Marcas aliadas</div>
+      <h2 class="section-title reveal reveal-delay-1">Trabajamos con los mejores materiales del mercado.</h2>
+    </div>
+
+    <div class="marcas-carousel reveal reveal-scale">
+      <div class="marcas-track marcas-track-left">
+        <div class="marcas-set">
+          <div class="marca-logo"><img src="marcas/acteon.png" alt="Acteon" /></div>
+          <div class="marca-logo"><img src="marcas/ALKAMEDICA.png" alt="Alkamedica" style="--logo-scale: 1" /></div>
+          <div class="marca-logo"><img src="marcas/BEGO.png" alt="Bego" /></div>
+          <div class="marca-logo"><img src="marcas/coltene.png" alt="Coltene" style="--logo-scale: 1.5"   /></div>
+          <div class="marca-logo"><img src="marcas/C-TECH.png" alt="C-Tech" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/dentsply.jpeg" alt="Dentsply" /></div>
+          <div class="marca-logo"><img src="marcas/eufar.webp" alt="Eufar" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/fgm.png" alt="FGM" /></div>
+          <div class="marca-logo"><img src="marcas/gc.png" alt="GC" /></div>
+          <div class="marca-logo"><img src="marcas/Ivoclar.jpg" alt="Ivoclar" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/Kerr.webp" alt="Kerr" style="--logo-scale: 2.5" /></div>
+        </div>
+        <div class="marcas-set" aria-hidden="true">
+          <div class="marca-logo"><img src="marcas/acteon.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/ALKAMEDICA.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/BEGO.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/coltene.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/C-TECH.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/dentsply.jpeg" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/eufar.webp" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/fgm.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/gc.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/Ivoclar.jpg" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/Kerr.webp" alt="" /></div>
+        </div>
+      </div>
+
+      <div class="marcas-track marcas-track-right">
+        <div class="marcas-set">
+          <div class="marca-logo"><img src="marcas/newstetic.jfif" alt="Newstetic" /></div>
+          <div class="marca-logo"><img src="marcas/proquident.jfif" alt="Proquident" /></div>
+          <div class="marca-logo"><img src="marcas/ropsohn.png" alt="Ropsohn" style="--logo-scale: 1" /></div>
+          <div class="marca-logo"><img src="marcas/solventum.jpg" alt="Solventum" style="--logo-scale: 1.5"/></div>
+          <div class="marca-logo"><img src="marcas/ultradent.jpg" alt="Ultradent" /></div>
+          <div class="marca-logo"><img src="marcas/vita.png" alt="Vita" /></div>
+          <div class="marca-logo"><img src="marcas/wyh.png" alt="WYH" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/yucera.png" alt="Yucera" /></div>
+          <div class="marca-logo"><img src="marcas/zhermack.jpg" alt="Zhermack" style="--logo-scale: 2.7" /></div>
+          <div class="marca-logo"><img src="marcas/zirvex.jpeg" alt="Zirvex" style="--logo-scale: 2" /></div>
+        </div>
+        <div class="marcas-set" aria-hidden="true">
+          <div class="marca-logo"><img src="marcas/newstetic.jfif" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/proquident.jfif" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/ropsohn.png" alt="" style="--logo-scale: 1.2 " /></div>
+          <div class="marca-logo"><img src="marcas/solventum.jpg" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/ultradent.jpg" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/vita.png" alt="" style="--logo-scale: 2"/></div>
+          <div class="marca-logo"><img src="marcas/wyh.png" alt="" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/yucera.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/zhermack.jpg" alt="" style="--logo-scale: 3.5" /></div>
+          <div class="marca-logo"><img src="marcas/zirvex.jpeg" alt=""/></div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+      🖥️ CARRUSEL DE COMPATIBILIDAD DE SOFTWARE:
+      Son solo 4 logos, así que la misma lista se repite varias veces dentro
+      de cada .marcas-set para que alcance a llenar la pantalla en cualquier
+      tamaño. Si agregas o quitas un software, hazlo en las 2 listas
+      (marcas-set visible + su copia aria-hidden), manteniendo el mismo orden
+      en las repeticiones.
+    -->
+    <div class="marcas-head container" style="margin-top: 3rem;">
+      <div class="section-label reveal">Compatibilidad de software</div>
+    </div>
+    <div class="marcas-carousel reveal reveal-scale">
+      <div class="marcas-track marcas-track-left">
+        <div class="marcas-set">
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="Chitubox" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="Hyperdent" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="Exocad" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="3Shape" style="--logo-scale: 1" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="Chitubox" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="Hyperdent" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="Exocad" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="3Shape" style="--logo-scale: 1" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="Chitubox" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="Hyperdent" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="Exocad" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="3Shape" style="--logo-scale: 1" /></div>
+        </div>
+        <div class="marcas-set" aria-hidden="true">
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="" style="--logo-scale: 1" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="" style="--logo-scale: 1" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="" style="--logo-scale: 1" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="container">
+      <div class="section-label reveal">Contacto</div>
+      <h2 class="section-title reveal reveal-delay-1">Hablemos de tu próximo caso.</h2>
+      <div class="contacto-grid">
+        <div class="contacto-card reveal reveal-left">
+          <p class="section-sub">Escríbenos por WhatsApp o completa el formulario y te responderemos con una cotización personalizada.</p>
+          <div class="contacto-dato">
+            <i class="fa-brands fa-whatsapp"></i>
+            <div>
+              <strong>WhatsApp</strong>
+              <span>321 5527243</span>
+            </div>
+          </div>
+          <div class="contacto-dato">
+            <i class="fa-brands fa-instagram"></i>
+            <div>
+              <strong>Instagram</strong>
+              <span>@dannydentlab1.0</span>
+            </div>
+          </div>
+          <div class="contacto-dato">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+              <strong>Correo</strong>
+              <span>Dannydentdigitaldentallab@gmail.com</span>
+            </div>
+          </div>
+        </div>
+        <form id="contactoForm" class="contacto-card contacto-form reveal reveal-right">
+          <div class="form-row">
+            <input class="form-input" type="text" name="nombre" placeholder="Tu nombre" />
+            <input class="form-input" type="email" name="email" placeholder="Tu correo" />
+          </div>
+          <div class="form-row">
+            <input class="form-input" type="text" name="clinica" placeholder="Clínica, odontólogo o empresa" />
+            <input class="form-input" type="text" name="telefono" placeholder="Teléfono" />
+          </div>
+          <textarea class="form-input" name="text" placeholder="Cuéntanos tu caso o qué necesitas"></textarea>
+          <button class="btn-enviar" type="submit">Enviar cotización</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img class="footer-logo" src="logo.png" alt="DannyDent" />
+        <p>Laboratorio dental digital especializado en alta estética, precisión y tecnología para odontólogos que buscan resultados excepcionales.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Secciones</h4>
+        <ul>
+          <li><a href="#quienes">Nosotros</a></li>
+          <li><a href="#antes-despues">Casos</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#combos">Combos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Fundador</h4>
+        <!--
+          👤 FOTOS DEL FUNDADOR (footer):
+          Coloca las 2 fotos de Daniel dentro de la carpeta "quienes/" y
+          cambia el "src" de cada .founder-slide por el nombre real del
+          archivo. Se alternan solas cada 5 segundos.
+        -->
+        <div class="founder-carousel">
+          <div class="founder-slide"><img src="quienes/daniel1.jpg" alt="Daniel Pallarez Gutiérrez" /></div>
+          <div class="founder-slide"><img src="quienes/daniel2.jpg" alt="Daniel Pallarez Gutiérrez" /></div>
+        </div>
+        <div class="founder-caption">
+          <strong>Daniel Pallarez Gutiérrez</strong>
+          <span>Fundador y director técnico de DannyDent</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 DannyDent. Todos los derechos reservados.</span>
+      <span>Estética • Precisión • Innovación</span>
+    </div>
+  </footer>
+
+  <a href="https://www.instagram.com/dannydentlab1.0/" class="insta-float" target="_blank" rel="noopener" aria-label="Instagram">
+    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+  </a>
+  <a href="https://wa.me/573215527243" class="wpp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp fa-lg"></i>
+  </a>
+
+  <script>
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      const isOpen = links.style.display === 'flex';
+      links.style.display = isOpen ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '86px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'rgba(255,255,255,0.98)';
+      links.style.padding = '1rem 1.5rem 1.3rem';
+      links.style.boxShadow = '0 10px 24px rgba(20,33,61,.08)';
+      links.querySelectorAll('a').forEach(a => a.style.color = '#60708f');
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el));
+
+    /* ===== Dots del carrusel "Quiénes somos" (sincronizados con el fade de 5s) ===== */
+    const quienesDots = document.querySelectorAll('.quienes-dots .dot');
+    if (quienesDots.length) {
+      let qIndex = 0;
+      setInterval(() => {
+        quienesDots[qIndex].classList.remove('active');
+        qIndex = (qIndex + 1) % quienesDots.length;
+        quienesDots[qIndex].classList.add('active');
+      }, 5000);
+    }
+
+    /* ===== Productos: pestañas interactivas (estilo SmartEnergy) ===== */
+    const productTabs = document.querySelectorAll('.product-tab');
+    const prodTag = document.getElementById('prodTag');
+    const prodTagText = document.getElementById('prodTagText');
+    const prodDesc = document.getElementById('prodDesc');
+    const prodChips = document.getElementById('prodChips');
+    const prodIdeal = document.getElementById('prodIdeal');
+    const prodVisualTitle = document.getElementById('prodVisualTitle');
+    const prodVisualImg = document.getElementById('prodVisualImg');
+    const prodVisualPrev = document.getElementById('prodVisualPrev');
+    const prodVisualNext = document.getElementById('prodVisualNext');
+    const prodVisualDots = document.getElementById('prodVisualDots');
+
+    let currentImages = [];
+    let currentImgIndex = 0;
+
+    function renderVisualImage(withFade) {
+      const src = currentImages[currentImgIndex];
+      const setImg = () => {
+        prodVisualImg.src = src;
+        prodVisualImg.alt = prodVisualTitle.textContent;
+        prodVisualImg.classList.remove('fading');
+      };
+      if (withFade) {
+        prodVisualImg.classList.add('fading');
+        setTimeout(setImg, 220);
+      } else {
+        setImg();
+      }
+
+      const multi = currentImages.length > 1;
+      prodVisualPrev.classList.toggle('hidden', !multi);
+      prodVisualNext.classList.toggle('hidden', !multi);
+      prodVisualDots.classList.toggle('hidden', !multi);
+
+      if (multi) {
+        prodVisualDots.innerHTML = currentImages
+          .map((_, i) => `<button type="button" class="visual-dot${i === currentImgIndex ? ' active' : ''}" data-index="${i}" aria-label="Ver foto ${i + 1}"></button>`)
+          .join('');
+      }
+    }
+
+    function goToImage(index, withFade) {
+      currentImgIndex = (index + currentImages.length) % currentImages.length;
+      renderVisualImage(withFade);
+    }
+
+    prodVisualPrev.addEventListener('click', () => goToImage(currentImgIndex - 1, true));
+    prodVisualNext.addEventListener('click', () => goToImage(currentImgIndex + 1, true));
+    prodVisualDots.addEventListener('click', (e) => {
+      const dot = e.target.closest('.visual-dot');
+      if (!dot) return;
+      goToImage(parseInt(dot.dataset.index, 10), true);
+    });
+
+    productTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        if (tab.classList.contains('active')) return;
+
+        productTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        prodTag.querySelector('i').className = tab.dataset.icon;
+        prodTagText.textContent = tab.dataset.tag;
+        prodDesc.textContent = tab.dataset.desc;
+        prodIdeal.textContent = tab.dataset.ideal;
+        prodVisualTitle.textContent = tab.dataset.titulo;
+
+        prodChips.innerHTML = tab.dataset.materiales
+          .split(',')
+          .map(m => `<span class="chip">${m.trim()}</span>`)
+          .join('');
+
+        currentImages = tab.dataset.img.split(',').map(s => s.trim()).filter(Boolean);
+        currentImgIndex = 0;
+        renderVisualImage(true);
+      });
+    });
+
+    // Inicializa el visor con las imágenes de la pestaña activa al cargar la página
+    const initialTab = document.querySelector('.product-tab.active') || productTabs[0];
+    if (initialTab) {
+      currentImages = initialTab.dataset.img.split(',').map(s => s.trim()).filter(Boolean);
+      currentImgIndex = 0;
+      renderVisualImage(false);
+    }
+
+    /* ===== Galería Antes y Después (carrusel automático en loop) ===== */
+    const adTrack = document.getElementById('adTrack');
+    if (adTrack) {
+      // Duplicamos las tarjetas una vez para poder hacer un loop infinito sin cortes
+      const adOriginalCards = Array.from(adTrack.children);
+      adOriginalCards.forEach(card => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        adTrack.appendChild(clone);
+      });
+
+      let adPaused = false;
+      let adPos = 0;
+      const AD_SPEED = 0.9; // px por frame — más bajo = más lento
+
+      adTrack.addEventListener('mouseenter', () => { adPaused = true; });
+      adTrack.addEventListener('mouseleave', () => { adPaused = false; });
+      // También pausa al tocar en móvil, para no pelear con el dedo del usuario
+      adTrack.addEventListener('touchstart', () => { adPaused = true; }, { passive: true });
+      adTrack.addEventListener('touchend', () => { adPaused = false; }, { passive: true });
+
+      function adAutoScroll() {
+        if (!adPaused) {
+          const halfWidth = adTrack.scrollWidth / 2;
+          adPos += AD_SPEED;
+          if (adPos >= halfWidth) adPos -= halfWidth;
+          adTrack.scrollLeft = adPos;
+        } else {
+          // si el usuario arrastró manualmente mientras estaba en pausa, sincronizamos
+          adPos = adTrack.scrollLeft;
+        }
+        requestAnimationFrame(adAutoScroll);
+      }
+      requestAnimationFrame(adAutoScroll);
+    }
+    /* ===== Slideshow de fotos Runyes (Combo Inicial) ===== */
+    document.querySelectorAll('.combo-slideshow').forEach(slideshow => {
+      const imgs = slideshow.querySelectorAll('img');
+      if (imgs.length < 2) return;
+      let adIdx = 0;
+      setInterval(() => {
+        imgs[adIdx].classList.remove('is-active');
+        adIdx = (adIdx + 1) % imgs.length;
+        imgs[adIdx].classList.add('is-active');
+      }, 3000);
+    });
+
+    /* ===== Modal "Más información" de cada combo (estilo catálogo) =====
+       Edita aquí el texto, las fotos y qué incluye cada combo. */
+    const WPP_NUMBER = '573215527243';
+    const comboData = {
+      runyes: {
+        eyebrow: 'Scanner intraoral',
+        title: 'Combo Inicial — Scanner Runyes',
+        desc: 'Para clínicas que están dando el salto al escaneo digital. El scanner intraoral Runyes captura impresiones digitales precisas en minutos, sin las incomodidades de la impresión tradicional. Incluye instalación, configuración del equipo y una capacitación básica de uso para que tu clínica empiece a escanear desde el primer día.',
+        images: ['img/runyes/runyes0.jpg','img/runyes/runyes1.jpeg', 'img/runyes/runyes2.jpeg', 'img/runyes/runyes3.jpeg', 'img/runyes/runyes4.jpeg', 'img/runyes/runyes5.jpeg'],
+        features: ['Scanner intraoral Runyes', 'Instalación y configuración', 'Capacitación básica de uso']
+      },
+      pro: {
+        eyebrow: 'Scanner + PC para CAD/CAM',
+        title: 'Combo Digital Pro',
+        desc: 'Todo lo necesario para escanear, diseñar y enviar casos sin depender de otro equipo. Incluye el scanner intraoral Runyes junto con un computador con las especificaciones necesarias para trabajar el software CAD/CAM sin cuellos de botella, además de asesoría técnica gratuita y soporte con capacitación incluida.',
+        images: ['img/runyes/combopc.jpg', 'img/runyes/runyes1.jpeg', 'img/runyes/runyes5.jpeg', 'img/runyes/acer1.jpg', 'img/runyes/acer2.jpg'],
+        features: ['Scanner intraoral Runyes', 'PC con especificaciones para CAD/CAM', 'Asesoría técnica gratuita', 'Soporte y capacitación incluida']
+      },
+      rayosx: {
+        eyebrow: 'Rayos X portátil',
+        title: 'Equipo de Rayos X Portátil',
+        desc: 'Generador de rayos X dental portátil, ideal para consultorios con poco espacio, atención a domicilio o casos que requieren movilidad. Funciona con sensor digital (RVG) conectado por cable, pantalla integrada para ver la toma al instante, batería interna recargable y controles ajustables de kV y tiempo de exposición para distintos tipos de radiografía.',
+        images: ['img/runyes/cam1.JPG', 'img/runyes/cam2.JPG', 'img/runyes/cam3.JPG', 'img/runyes/cam4.JPG', 'img/runyes/cam5.JPG'],
+        features: ['Generador de rayos X portátil', 'Sensor digital RVG incluido', 'Pantalla integrada de visualización', 'Batería interna recargable']
+      }
+    };
+
+    const comboModal = document.getElementById('comboModal');
+    const comboModalBreadcrumb = document.getElementById('comboModalBreadcrumb');
+    const comboModalMainImg = document.getElementById('comboModalMainImg');
+    const comboModalThumbs = document.getElementById('comboModalThumbs');
+    const comboModalEyebrow = document.getElementById('comboModalEyebrow');
+    const comboModalTitle = document.getElementById('comboModalTitle');
+    const comboModalDesc = document.getElementById('comboModalDesc');
+    const comboModalChips = document.getElementById('comboModalChips');
+    const comboModalWppBtn = document.getElementById('comboModalWppBtn');
+    let comboAutoSlide = null;
+    let comboActiveIdx = 0;
+    let comboActiveImages = [];
+
+    function comboSetImage(idx) {
+      comboActiveIdx = idx;
+      comboModalMainImg.src = comboActiveImages[idx];
+      comboModalThumbs.querySelectorAll('.combo-modal-thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === idx);
+      });
+    }
+
+    function openComboModal(key) {
+      const data = comboData[key];
+      if (!data || !comboModal) return;
+
+      comboModalBreadcrumb.textContent = data.title;
+      comboModalEyebrow.textContent = data.eyebrow;
+      comboModalTitle.textContent = data.title;
+      comboModalDesc.textContent = data.desc;
+
+      comboModalChips.innerHTML = data.features
+        .map(f => `<span class="combo-modal-chip"><i class="fa-solid fa-check"></i>${f}</span>`)
+        .join('');
+
+      comboActiveImages = data.images;
+      comboModalThumbs.innerHTML = data.images
+        .map((src, i) => `<button type="button" class="combo-modal-thumb${i === 0 ? ' active' : ''}" data-idx="${i}"><img src="${src}" alt="${data.title} - foto ${i + 1}"></button>`)
+        .join('');
+      comboModalThumbs.querySelectorAll('.combo-modal-thumb').forEach(t => {
+        t.addEventListener('click', () => comboSetImage(Number(t.dataset.idx)));
+      });
+      comboSetImage(0);
+
+      const wppMsg = `Hola, quiero cotizar el ${data.title}`;
+      comboModalWppBtn.href = `https://wa.me/${WPP_NUMBER}?text=${encodeURIComponent(wppMsg)}`;
+
+      if (comboAutoSlide) clearInterval(comboAutoSlide);
+      if (comboActiveImages.length > 1) {
+        comboAutoSlide = setInterval(() => {
+          comboSetImage((comboActiveIdx + 1) % comboActiveImages.length);
+        }, 3500);
+      }
+
+      comboModal.classList.add('is-open');
+      comboModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeComboModal() {
+      if (!comboModal) return;
+      comboModal.classList.remove('is-open');
+      comboModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (comboAutoSlide) { clearInterval(comboAutoSlide); comboAutoSlide = null; }
+    }
+
+    /* ===== Formulario de contacto: arma el mensaje completo y lo manda por WhatsApp ===== */
+    const contactoForm = document.getElementById('contactoForm');
+    if (contactoForm) {
+      contactoForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nombre = contactoForm.nombre.value.trim();
+        const email = contactoForm.email.value.trim();
+        const clinica = contactoForm.clinica.value.trim();
+        const telefono = contactoForm.telefono.value.trim();
+        const mensaje = contactoForm.text.value.trim();
+
+        const partes = [
+          'Hola, quiero solicitar una cotización:',
+          nombre ? `Nombre: ${nombre}` : null,
+          email ? `Correo: ${email}` : null,
+          clinica ? `Clínica, odontólogo o empresa: ${clinica}` : null,
+          telefono ? `Teléfono: ${telefono}` : null,
+          mensaje ? `Caso o necesidad: ${mensaje}` : null,
+        ].filter(Boolean);
+
+        const textoFinal = partes.join('\n');
+        window.open(`https://wa.me/${WPP_NUMBER}?text=${encodeURIComponent(textoFinal)}`, '_blank');
+      });
+    }
+
+    document.querySelectorAll('.combo-cta[data-combo]').forEach(btn => {
+      btn.addEventListener('click', () => openComboModal(btn.dataset.combo));
+    });
+    document.querySelectorAll('[data-modal-close]').forEach(el => {
+      el.addEventListener('click', closeComboModal);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeComboModal();
+    });
+  </script>
+</body>
+</html>
