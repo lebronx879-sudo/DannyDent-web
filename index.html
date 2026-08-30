@@ -304,6 +304,10 @@
     .quienes-slide:nth-child(3) { animation-delay: 10s; }
     .quienes-slide:nth-child(4) { animation-delay: 15s; }
     .quienes-slide img, .quienes-slide video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .quienes-video {
+      width: 100%; height: min(46vh, 400px); border-radius: 20px; object-fit: cover; display: block;
+      box-shadow: 0 20px 60px rgba(20,33,61,.16); border: 1px solid rgba(46,124,225,0.16); background: var(--navy);
+    }
     @keyframes quienesFade {
       0%   { opacity: 0; }
       4%   { opacity: 1; }
@@ -777,7 +781,7 @@
   <section id="hero">
     <div class="hero-bg">
       <video autoplay muted loop playsinline preload="auto">
-        <source src="video1.mp4" type="video/mp4" />
+        <source src="video1.MOV" type="video/mp4" />
       </video>
     </div>
     <div class="hero-overlay"></div>
@@ -803,38 +807,13 @@
       <div class="quienes-grid">
 
         <!--
-          🎞️ CARRUSEL DE FOTOS Y VIDEOS (Quiénes somos):
-          Coloca tus archivos en una carpeta "quienes/" junto al HTML y
-          cambia los "src" de abajo. Puedes mezclar fotos (<img>) y videos
-          (<video autoplay muted loop playsinline>) sin problema, cada uno
-          es un ".quienes-slide". Van pasando solos con animación (fade),
-          uno cada 5 segundos. Si agregas o quitas slides, ajusta también
-          en el CSS las reglas ".quienes-slide:nth-child(n)" con su
-          "animation-delay" (deben repartirse en partes iguales dentro de
-          los 20s totales) y agrega/quita un <span class="dot"></span> en
-          ".quienes-dots" para que coincidan en cantidad.
+          🎞️ VIDEO (Quiénes somos):
+          Un solo video en loop continuo. Está en la carpeta "quienes/" y
+          se llama "video2.mp4". Si cambias el nombre del archivo, ajusta
+          el "src" de abajo.
         -->
         <div class="quienes-media reveal reveal-left">
-          <div class="quienes-slider">
-            <div class="quienes-slide">
-              <video src="quienes/video3.mov" autoplay muted loop playsinline></video>
-            </div>
-            <div class="quienes-slide">
-              <img src="quienes/foto1.jpg" alt="Equipo DannyDent" />
-            </div>
-            <div class="quienes-slide">
-              <video src="quienes/scaneo.mp4" autoplay muted loop playsinline></video>
-            </div>
-            <div class="quienes-slide">
-              <video src="quienes/video2.mov" autoplay muted loop playsinline></video>
-            </div>
-          </div>
-          <div class="quienes-dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
+          <video class="quienes-video" src="quienes/video2.mp4" autoplay muted loop playsinline></video>
         </div>
 
         <div class="quienes-text reveal reveal-right">
@@ -959,7 +938,7 @@
             data-desc="Precisión de ajuste, excelente acabado y tiempos cortos para provisionales y modelos de trabajo. Fabricación digital con impresión 3D de última generación."
             data-materiales="Impresión 3D,Provisionales,Modelos de trabajo"
             data-ideal="provisionales, guías quirúrgicas y modelos de estudio rápidos."
-            data-img="img/3d.png"
+            data-img="img/prisma3d.jpg"
             data-titulo="Cerómero impreso 3D"
           >
             <span>
@@ -1033,7 +1012,7 @@
         <div class="video-grid">
           <div class="video-card reveal reveal-scale">
             <video autoplay muted loop playsinline preload="auto">
-              <source src="exocad/runyes1.mp4" type="video/mp4" />
+              <source src="exocad/runyes1.mov" type="video/mp4" />
             </video>
             <div class="video-caption">Revisión de ajuste</div>
           </div>
@@ -1218,43 +1197,43 @@
           <div class="marca-logo"><img src="marcas/coltene.png" alt="Coltene" style="--logo-scale: 1.5"   /></div>
           <div class="marca-logo"><img src="marcas/C-TECH.png" alt="C-Tech" style="--logo-scale: 1.5" /></div>
           <div class="marca-logo"><img src="marcas/dentsply.jpeg" alt="Dentsply" /></div>
-          <div class="marca-logo"><img src="marcas/eufar.webp" alt="Eufar" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/eufar.jpg" alt="Eufar" style="--logo-scale: 1.5" /></div>
           <div class="marca-logo"><img src="marcas/fgm.png" alt="FGM" /></div>
           <div class="marca-logo"><img src="marcas/gc.png" alt="GC" /></div>
           <div class="marca-logo"><img src="marcas/Ivoclar.jpg" alt="Ivoclar" style="--logo-scale: 2.5" /></div>
-          <div class="marca-logo"><img src="marcas/Kerr.webp" alt="Kerr" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/Kerr.jpg" alt="Kerr" style="--logo-scale: 2.5" /></div>
         </div>
         <div class="marcas-set" aria-hidden="true">
           <div class="marca-logo"><img src="marcas/acteon.png" alt="" /></div>
-          <div class="marca-logo"><img src="marcas/ALKAMEDICA.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/ALKAMEDICA.png" alt="" style="--logo-scale: 1" /></div>
           <div class="marca-logo"><img src="marcas/BEGO.png" alt="" /></div>
-          <div class="marca-logo"><img src="marcas/coltene.png" alt="" /></div>
-          <div class="marca-logo"><img src="marcas/C-TECH.png" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/coltene.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/C-TECH.png" alt="" style="--logo-scale: 1.5" /></div>
           <div class="marca-logo"><img src="marcas/dentsply.jpeg" alt="" /></div>
-          <div class="marca-logo"><img src="marcas/eufar.webp" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/eufar.jpg" alt="" style="--logo-scale: 1.5" /></div>
           <div class="marca-logo"><img src="marcas/fgm.png" alt="" /></div>
           <div class="marca-logo"><img src="marcas/gc.png" alt="" /></div>
-          <div class="marca-logo"><img src="marcas/Ivoclar.jpg" alt="" /></div>
-          <div class="marca-logo"><img src="marcas/Kerr.webp" alt="" /></div>
+          <div class="marca-logo"><img src="marcas/Ivoclar.jpg" alt="" style="--logo-scale: 2.5" /></div>
+          <div class="marca-logo"><img src="marcas/Kerr.jpg" alt="" style="--logo-scale: 2.5" /></div>
         </div>
       </div>
 
       <div class="marcas-track marcas-track-right">
         <div class="marcas-set">
-          <div class="marca-logo"><img src="marcas/newstetic.jfif" alt="Newstetic" /></div>
-          <div class="marca-logo"><img src="marcas/proquident.jfif" alt="Proquident" /></div>
-          <div class="marca-logo"><img src="marcas/ropsohn.png" alt="Ropsohn" style="--logo-scale: 1" /></div>
-          <div class="marca-logo"><img src="marcas/solventum.jpg" alt="Solventum" style="--logo-scale: 1.5"/></div>
-          <div class="marca-logo"><img src="marcas/ultradent.jpg" alt="Ultradent" /></div>
-          <div class="marca-logo"><img src="marcas/vita.png" alt="Vita" /></div>
-          <div class="marca-logo"><img src="marcas/wyh.png" alt="WYH" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/newstetic.jpg" alt="Newstetic" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/proquident.jpg" alt="Proquident" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/ropsohn.png" alt="Ropsohn" style="--logo-scale: 1.2" /></div>
+          <div class="marca-logo"><img src="marcas/solventum.jpg" alt="Solventum" style="--logo-scale: 2"/></div>
+          <div class="marca-logo"><img src="marcas/ultradent.jpg" alt="Ultradent" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/vita.png" alt="Vita" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/wyh.png" alt="WYH" style="--logo-scale: 2.5" /></div>
           <div class="marca-logo"><img src="marcas/yucera.png" alt="Yucera" /></div>
-          <div class="marca-logo"><img src="marcas/zhermack.jpg" alt="Zhermack" style="--logo-scale: 2.7" /></div>
+          <div class="marca-logo"><img src="marcas/zhermack.jpg" alt="Zhermack" style="--logo-scale: 3.5" /></div>
           <div class="marca-logo"><img src="marcas/zirvex.jpeg" alt="Zirvex" style="--logo-scale: 2" /></div>
         </div>
         <div class="marcas-set" aria-hidden="true">
-          <div class="marca-logo"><img src="marcas/newstetic.jfif" alt="" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/proquident.jfif" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/newstetic.jpg" alt="" style="--logo-scale: 2" /></div>
+          <div class="marca-logo"><img src="marcas/proquident.jpg" alt="" style="--logo-scale: 2" /></div>
           <div class="marca-logo"><img src="marcas/ropsohn.png" alt="" style="--logo-scale: 1.2 " /></div>
           <div class="marca-logo"><img src="marcas/solventum.jpg" alt="" style="--logo-scale: 2" /></div>
           <div class="marca-logo"><img src="marcas/ultradent.jpg" alt="" style="--logo-scale: 1.5" /></div>
@@ -1262,7 +1241,7 @@
           <div class="marca-logo"><img src="marcas/wyh.png" alt="" style="--logo-scale: 2.5" /></div>
           <div class="marca-logo"><img src="marcas/yucera.png" alt="" /></div>
           <div class="marca-logo"><img src="marcas/zhermack.jpg" alt="" style="--logo-scale: 3.5" /></div>
-          <div class="marca-logo"><img src="marcas/zirvex.jpeg" alt=""/></div>
+          <div class="marca-logo"><img src="marcas/zirvex.jpeg" alt="" style="--logo-scale: 2"/></div>
         </div>
       </div>
     </div>
@@ -1281,32 +1260,32 @@
     <div class="marcas-carousel reveal reveal-scale">
       <div class="marcas-track marcas-track-left">
         <div class="marcas-set">
-          <div class="marca-logo"><img src="marcas/chitubox.png" alt="Chitubox" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="Hyperdent" style="--logo-scale: 2.5" /></div>
-          <div class="marca-logo"><img src="marcas/exocad.png" alt="Exocad" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/3shape.png" alt="3Shape" style="--logo-scale: 1" /></div>
-          <div class="marca-logo"><img src="marcas/chitubox.png" alt="Chitubox" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="Hyperdent" style="--logo-scale: 2.5" /></div>
-          <div class="marca-logo"><img src="marcas/exocad.png" alt="Exocad" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/3shape.png" alt="3Shape" style="--logo-scale: 1" /></div>
-          <div class="marca-logo"><img src="marcas/chitubox.png" alt="Chitubox" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="Hyperdent" style="--logo-scale: 2.5" /></div>
-          <div class="marca-logo"><img src="marcas/exocad.png" alt="Exocad" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/3shape.png" alt="3Shape" style="--logo-scale: 1" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="Chitubox" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="Hyperdent" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="Exocad" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="3Shape" style="--logo-scale: 0.8" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="Chitubox" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="Hyperdent" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="Exocad" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="3Shape" style="--logo-scale: 0.8" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="Chitubox" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="Hyperdent" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="Exocad" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="3Shape" style="--logo-scale: 0.8" /></div>
         </div>
         <div class="marcas-set" aria-hidden="true">
-          <div class="marca-logo"><img src="marcas/chitubox.png" alt="" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="" style="--logo-scale: 2.5" /></div>
-          <div class="marca-logo"><img src="marcas/exocad.png" alt="" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/3shape.png" alt="" style="--logo-scale: 1" /></div>
-          <div class="marca-logo"><img src="marcas/chitubox.png" alt="" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="" style="--logo-scale: 2.5" /></div>
-          <div class="marca-logo"><img src="marcas/exocad.png" alt="" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/3shape.png" alt="" style="--logo-scale: 1" /></div>
-          <div class="marca-logo"><img src="marcas/chitubox.png" alt="" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="" style="--logo-scale: 2.5" /></div>
-          <div class="marca-logo"><img src="marcas/exocad.png" alt="" style="--logo-scale: 2" /></div>
-          <div class="marca-logo"><img src="marcas/3shape.png" alt="" style="--logo-scale: 1" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="" style="--logo-scale: 0.8" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="" style="--logo-scale: 0.8" /></div>
+          <div class="marca-logo"><img src="marcas/chitubox.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/hyperdent.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/exocad.png" alt="" style="--logo-scale: 1.5" /></div>
+          <div class="marca-logo"><img src="marcas/3shape.png" alt="" style="--logo-scale: 0.8" /></div>
         </div>
       </div>
     </div>
